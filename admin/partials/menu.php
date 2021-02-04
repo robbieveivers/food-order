@@ -1,3 +1,4 @@
+<?php include('../config/constants.php'); ?>
 <html>
     <head>
         <title> Food ordering website Roberto's - Home Page</title>
