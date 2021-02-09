@@ -13,6 +13,22 @@
                         echo $_SESSION['add-category'];
                         unset($_SESSION['add-category']);
                     }
+                    if(isset($_SESSION['remove'])){
+                        echo $_SESSION['remove'];
+                        unset($_SESSION['remove']);
+                    }
+                    if(isset($_SESSION['delete'])){
+                        echo $_SESSION['delete'];
+                        unset($_SESSION['delete']);
+                    }
+                    if(isset($_SESSION['no-category-found'])){
+                        echo $_SESSION['no-category-found'];
+                        unset($_SESSION['no-category-found']);
+                    }
+                    if(isset($_SESSION['remove'])){
+                        echo $_SESSION['remove'];
+                        unset($_SESSION['remove']);
+                    }
                 ?>
                 <br><br>
 
@@ -58,7 +74,7 @@
                                             if($image_name!=''){
                                                 // Display message
                                                 ?>
-                                                <img src="<?php echo SITEURL.'images/category'.$image_name;?>" width="100px" alt="">
+                                                <img src="<?php echo SITEURL.'images/category/'.$image_name;?>" width="100px" alt="">
                                                 <?php
                                             }
                                             else{
@@ -71,8 +87,8 @@
                                     <td><?php echo $featured;?></td>
                                     <td><?php echo $active;?></td>
                                     <td>
-                                        <a href="#" class='btn-secondary'>Update Category</a>
-                                        <a href="#" class='btn-danger'>Delete Category</a>
+                                        <a href="<?php echo SITEURL.'admin/update-category.php?id='.$id?>" class='btn-secondary'>Update Category</a>
+                                        <a href="<?php echo SITEURL.'admin/delete-category.php?id='.$id.'&image_name='.$image_name?>" class='btn-danger'>Delete Category</a>
                                     </td>
                                 </tr>
                             <?php

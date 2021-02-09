@@ -87,23 +87,26 @@
                     //Upload Image, To upload image, Need name and Source path and Destiation path
                     $image_name = $_FILES['image']['name'];
                     // Auto Renaming the image for database storage
-                    // Get the extention type of the image
-                    $extention_type = end(explode('.', $image_name));
-                    $image_name = $image_name.rand(000, 999).'.'.$extention_type;
-                    $source_path = $_FILES['image']['tmp_name'];
-                    $destination_path = "../images/category".$image_name;
-                    //Upload Image
-                    $upload = move_uploaded_file($source_path, $destination_path);
+                    if($image_name !=""){
+                        // Get the extention type of the image
+                        $extention_type = end(explode('.', $image_name));
+                        $image_name = $image_name.rand(000, 999).'.'.$extention_type;
+                        $source_path = $_FILES['image']['tmp_name'];
+                        $destination_path = "../images/category/".$image_name;
+                        //Upload Image
+                        $upload = move_uploaded_file($source_path, $destination_path);
 
-                    //Check whether the image is uploaded or not.
-                    //If the image is not uploaded then stop process and send error message
-                    if($upload==false){
-                        //Set Message
-                        $_SESSION['upload'] = "<div class='error'>Failed to Upload Image</div>";
-                        header('loacation:'.SITEURL.'admin/add-category.php');
-                        die();
+                        //Check whether the image is uploaded or not.
+                        //If the image is not uploaded then stop process and send error message
+                        if($upload==false){
+                            //Set Message
+                            $_SESSION['upload'] = "<div class='error'>Failed to Upload Image</div>";
+                            header('loacation:'.SITEURL.'admin/add-category.php');
+                            die();
 
+                        }
                     }
+
 
                 }
                 else{
