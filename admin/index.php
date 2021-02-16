@@ -1,26 +1,43 @@
-<html>
-    <head>
-        <title> Food ordering website Roberto's - Home Page</title>
-    </head>
-    
-    <body>
-        <!-- Menu section starts -->
-        <div class="menu">
-            Menu goes here
-        </div>
-        <!-- Menu section ends  -->
-
+<?php include('partials/menu.php'); ?>
         <!-- Main content section starts  -->
         <div class="main-content">
-            Main content goes here
+            <div class="wrapper"> 
+                <h1>Dashboard</h1>
+                <br><br>
+                <?php 
+                //Check whether there is a login message
+                if(isset($_SESSION['login'])){
+                    echo $_SESSION['login'];
+                    unset($_SESSION['login']);
+                }
+
+                ?>
+                <br><br>
+                <div class="col-4 text-center">
+                    <h1>5</h1>
+                    <br>
+                    Categories
+                </div>
+                <div class="col-4 text-center">
+                    <h1>5</h1>
+                    <br>
+                    Categories
+                </div>
+                <div class="col-4 text-center">
+                    <h1>5</h1>
+                    <br>
+                    Categories
+                </div>
+                <div class="col-4 text-center">
+                    <h1>5</h1>
+                    <br>
+                    Categories
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+            
         </div>
         <!-- Main content section ends  -->
-
-        <!-- Footer section starts  -->
-        <div class="footer">
-            footer goes here
-        </div>
-        <!-- Footer section ends  -->
-    </body>
-
-</html>
+        
+<?php include('partials/footer.php'); ?>
