@@ -40,12 +40,12 @@
 
 
         ?>
-        <form action="" method="POST" enctype="mulitpart/form-data">
+        <form action="" method="POST" enctype="multipart/form-data">
 
             <table class='tbl-30'>
                 <tr>
                     <td>Title:</td>
-                    <td><input type="text" name="title" placeholder="<?php echo $row['title']; ?> "></td>
+                    <td><input type="text" name="title" value="<?php echo $row['title']; ?> "></td>
                 </tr>
 
                 <tr>
@@ -79,13 +79,14 @@
                     <td>
                         <?php ?>
                         <input <?php if($row['active']=="Yes"){echo "checked";}?> type="radio" name="active" value='Yes'> Yes
-                        <input <?php if($row['active']=="Yes"){echo "checked";}?> type="radio" name="active" value='No'> No
+                        <input <?php if($row['active']=="No"){echo "checked";}?> type="radio" name="active" value='No'> No
                     </td>
                 </tr>
 
                 <tr>
                     <td colspan="3 ">
-                        <input type="hidden" name='id' value="<?php echo $id ?>">
+                        <input type="hidden" name='current_image' value="<?php echo $row['image_name']; ?>">
+                        <input type="hidden" name='id' value="<?php echo $id; ?>">
                         <input type="submit" name="submit" value="Update Category" class="btn-secondary">
                     </td>
                 </tr>
@@ -111,28 +112,80 @@
         //echo "Button Clicked";
 
         //1. Get Data from form
-        $full_name = $_POST['full_name'];
-        $username = $_POST['username'];
-        $id = $_POST['id'];
-       
+        $title = $_POST['title'];
+        $id = $_POST['id'];  
+        $current_image = $_POST['current_image'];
+        $featured = $_POST['featured'];
+        $active = $_POST['active'];
 
-        //2. SQL Query to Save the data into database
-        $sql = "UPDATE tbl_admin SET
-            full_name='$full_name',
-            username='$username'
-            WHERE id='$id'
+        //2. Updating new Image if Selected
+        //$sql2 = ''
+        if(isset($_FILES['image']['name'])){
+            $image_name = $_FILES['image']['name'];
 
+            if($image_name !=""){
+                //Image Available
+                //Upload new image
+                    //Get the extention type of the image
+                    $extention_type = end(explode('.', $image_name));
+                    $image_name = $image_name.rand(000, 999).'.'.$extention_type;
+                    $source_path = $_FILES['image']['tmp_name'];
+                    $destination_path = "../images/category/".$image_name;
+                    //Upload Image
+                    $upload = move_uploaded_file($source_path, $destination_path);
+
+                    //Check whether the image is uploaded or not.
+                    //If the image is not uploaded then stop process and send error message
+                    if($upload==false){
+                        //Set Message
+                        $_SESSION['upload'] = "<div class='error'>Failed to Upload Image</div>";
+                        header('loacation:'.SITEURL.'admin/manange-category.php');
+                        die();
+
+                    }
+                    if($current_image!=""){
+                                                //Remove old image
+                        $remove_path = '../images/category/'.$current_image;
+                        $remove = unlink($remove_path);
+                        if($remove==false){
+                            //failed to delete image
+                            $_SESSION['remove'] = "<div class='error'>Image Failed to Delete.</div>";
+                            header('location:'.SITEURL.'admin/manage-category.php');
+                            die();
+                        }
+                    }
+
+            }
+            else{
+                $image_name = $current_image;
+
+            }
+        }
+        else{
+            $image_name = $current_image;
+        }
+
+        //3. Update Database
+        $sql2 = "UPDATE tbl_category SET
+        title = '$title' ,
+        image_name = '$image_name' ,
+        featured = '$featured' ,
+        active = '$active'
+        WHERE id='$id'
         ";
 
+        $res2 = mysqli_query($conn, $sql2);
+
+        //4. Redirect to manage category page
+
         //3. Executing Query and saving data into database
-        $res = mysqli_query($conn, $sql) or die(mysqli_error());
+
 
         //4. CHeck whether the (Query is Executed) data is inserted or not and display appropriate message
-        if($res==TRUE){
+        if($res2==TRUE){
             //Data Inserted
-            //echo "Data inserted";
             //Create session Variable to display message
-            $_SESSION['update'] = "<div class=Success> Admin Updated Successfully </div>";
+            $_SESSION['update'] = "<div class=Success>Category Updated Successfully </div>";
             //Redirect page to manage admin
             header("location:".SITEURL.'admin/manage-category.php');
         }
@@ -140,7 +193,7 @@
             //Failed to Insert data
             //echo "failed to insert data";
             //Create session Variable to display message
-            $_SESSION['update'] = "<div class=error> Failed to Update Admin </div>";
+            $_SESSION['update'] = "<div class=error> Failed to Update Category </div>";
             //Redirect page to manage admin
             header("location:".SITEURL.'admin/update-category.php');
         }
