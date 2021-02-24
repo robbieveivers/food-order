@@ -73,23 +73,23 @@
 
             <?php 
             // Getting food from data base that are featured and ative
-            $sql2 = "SELECT * FROM tbl_food WHERE active='Yes' AND featured='yes' LIMIT 6'"
+            $sql2 = "SELECT * FROM tbl_food WHERE active='yes' AND featured='yes' LIMIT 6";
             $res2 = mysqli_query($conn,$sql2);
             $count2 = mysqli_num_rows($res2);
 
-            if(count2>0){
+            if($count2>0){
                 while($row2=mysqli_fetch_assoc($res2)){
                     $id = $row2['id'];
                     $title= $row2['title'];
                     $price = $row2['price'];
                     $description = $row2['description'];
                     $image_name = $row2['image_name'];
-                    
+
                 }
 
             }
             else{
-                echo "<div class ='error'>Food not avaiable.</div>"
+                echo "<div class ='error'>Food not avaiable.</div>";
             }
             ?>
 
