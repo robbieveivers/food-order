@@ -6,6 +6,7 @@
                 <h1>Manage Food</h1>
                 <br>
                 <br>
+<<<<<<< HEAD
 
                 <?php 
                     if(isset($_SESSION['add'])){
@@ -43,6 +44,12 @@
 
                 <!-- Button to add admin -->
                 <a href="<?php echo SITEURL ?>admin/add-food.php" class='btn-primary'>Add Food</a>
+=======
+                <br>
+
+                <!-- Button to add admin -->
+                <a href="#" class='btn-primary'>Add Food</a>
+>>>>>>> e3a9d253e4e7ff152c12aed3335bcea3f1507b43
                 <br>
                 <br>
                 <br>
@@ -50,6 +57,7 @@
                 <table class="tbl-full">
                     <tr>
                         <th>S.N.</th>
+<<<<<<< HEAD
                         <th>Title</th>
                         <th>Price</th>
                         <th>Image</th>
@@ -111,6 +119,44 @@
                         
                     
                     ?>
+=======
+                        <th>Full Name</th>
+                        <th>Username</th>
+                        <th>Actions</th>
+                    </tr>
+
+                    <tr>
+                        <td>1.</td>
+                        <td>Robbie veivers</td>
+                        <td>robbieveivers</td>
+                        <td>
+                            <a href="#" class='btn-secondary'>Update Admin</a>
+                            <a href="#" class='btn-danger'>Delete Admin</a>
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td>1.</td>
+                        <td>Robbie veivers</td>
+                        <td>robbieveivers</td>
+                        <td>
+                            <a href="#" class='btn-secondary'>Update Admin</a>
+                            <a href="#" class='btn-danger'>Delete Admin</a>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>1.</td>
+                        <td>Robbie veivers</td>
+                        <td>robbieveivers</td>
+                        <td>
+                            <a href="#" class='btn-secondary'>Update Admin</a>
+                            <a href="#" class='btn-danger'>Delete Admin</a>
+                        </td>
+                    </tr>
+
+>>>>>>> e3a9d253e4e7ff152c12aed3335bcea3f1507b43
 
                 </table>
 
