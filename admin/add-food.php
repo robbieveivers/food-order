@@ -119,10 +119,6 @@
             $featured = "No"; //Default Value is No
         }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> e3a9d253e4e7ff152c12aed3335bcea3f1507b43
         if(isset($_POST['active'])){
             $active = $_POST['active'];
         }

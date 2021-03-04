@@ -3,7 +3,7 @@
     <section class="food-search text-center">
         <div class="container">
             
-            <form action="food-search.html" method="POST">
+            <form action="<?php echo SITEURL; ?>food-search.php" method="POST">
                 <input type="search" name="search" placeholder="Search for Food.." required>
                 <input type="submit" name="submit" value="Search" class="btn btn-primary">
             </form>
@@ -73,7 +73,7 @@
 
             <?php 
             // Getting food from data base that are featured and ative
-            $sql2 = "SELECT * FROM tbl_food WHERE active='yes' AND featured='yes' LIMIT 6";
+            $sql2 = "SELECT * FROM tbl_food WHERE active='yes' AND featured='yes' LIMIT 9";
             $res2 = mysqli_query($conn,$sql2);
             $count2 = mysqli_num_rows($res2);
 
@@ -84,31 +84,44 @@
                     $price = $row2['price'];
                     $description = $row2['description'];
                     $image_name = $row2['image_name'];
-
+                    ?>
+                    <div class="food-menu-box">
+                    <div class="food-menu-img">
+                        <?php 
+                            //Check whether image is available or not
+                            if($image_name==""){
+                                echo "<div class='error'>Image not available.</div>";
+                                
+                            }
+                            else{
+                                //image available
+                                ?>
+                                <img src="<?php echo SITEURL;?>/images/food/<?php echo $image_name;?>" alt="<?php echo $image_name;?>" class="img-responsive img-curve">
+                                <?php
+                            }
+                        ?>
+                    </div>
+    
+                    <div class="food-menu-desc">
+                        <h4><?php echo $title;?></h4>
+                        <p class="food-price">$<?php echo $price;?></p>
+                        <p class="food-detail">
+                            <?php echo $description;?>
+                        </p>
+                        <br>
+    
+                        <a href="order.html" class="btn btn-primary">Order Now</a>
+                    </div>
+                </div>
+                <?php       
                 }
-
-            }
+}
             else{
                 echo "<div class ='error'>Food not avaiable.</div>";
             }
             ?>
 
-            <div class="food-menu-box">
-                <div class="food-menu-img">
-                    <img src="images/menu-pizza.jpg" alt="Chicke Hawain Pizza" class="img-responsive img-curve">
-                </div>
 
-                <div class="food-menu-desc">
-                    <h4>Food Title</h4>
-                    <p class="food-price">$2.3</p>
-                    <p class="food-detail">
-                        Made with Italian Sauce, Chicken, and organice vegetables.
-                    </p>
-                    <br>
-
-                    <a href="order.html" class="btn btn-primary">Order Now</a>
-                </div>
-            </div>
             <div class="clearfix"></div>
         </div>
 

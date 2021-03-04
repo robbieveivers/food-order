@@ -134,8 +134,10 @@
                 </tr>
                 <tr>
                     <td colspan="2">
+
+                        <input type="hidden" name='id' value="<?php echo $row['id']; ?>">
+                        
                         <input type="hidden" name='current_image' value="<?php echo $row['image_name']; ?>">
-                        <input type="hidden" name='id' value="<?php echo $id; ?>">
                         <input type="submit" value="Update Food" name="submit" class="btn-secondary">
                     </td>
                 
@@ -147,7 +149,7 @@
 </div>
 
 <?php
-    include('partials/footer.php');
+    
     //Process the Value from Form and save it in Database
 
     //Check Whether the submit buttons is clicked or not
@@ -238,4 +240,5 @@
 
         }
     }
+    include('partials/footer.php');
     ?>
